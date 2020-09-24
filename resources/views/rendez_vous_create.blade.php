@@ -52,46 +52,60 @@
                     <div class="Form-field">
                         <div class="Form-labelBlock">
                             <label for="" class="FormElement FormElement-label">Nom</label>
+                            <b style="color:red;">*</b>
                         </div>
                         <div class="Form-inputBlock">
-                            <input type="text" class="FormElement FormElement-input" name="nom">
+                            <input type="text" class="FormElement FormElement-input" name="nom" required>
                         </div>
                     </div>
 
                     <div class="Form-field">
                         <div class="Form-labelBlock">
                             <label for="" class="FormElement FormElement-label">Prenom</label>
+                            <b style="color:red;">*</b>
                         </div>
                         <div class="Form-inputBlock">
-                            <input type="text" class="FormElement FormElement-input" name="prenom">
+                            <input type="text" class="FormElement FormElement-input" name="prenom" required>
                         </div>
                     </div>
 
                     <div class="Form-field">
                         <div class="Form-labelBlock">
                             <label for="" class="FormElement FormElement-label">Sexe</label>
+                            <b style="color:red;">*</b>
                         </div>
                         <div class="Form-inputBlock">
-                            <select name="sexe" id="sexe" class="form-group">
-                                <option></option>
-                                <option value="Homme">Homme</option>
-                                <option value="Femme">Femme</option>
-                            </select>
+
+                            <input type="radio" id="Homme" name="sexe" value="Homme">
+                            <label for="Homme">Homme</label><br>
+
+                            <input type="radio" id="Femme" name="sexe" value="Femme">
+                            <label for="Femme">Femme</label><br>
                         </div>
                     </div>
 
                     <div class="Form-field">
                         <div class="Form-labelBlock">
                             <label for="" class="FormElement FormElement-label">Adresse</label>
+                            <b style="color:red;">*</b>
                         </div>
                         <div class="Form-inputBlock">
-                            <input type="text" class="FormElement FormElement-input" name="adresse">
+                            <input type="text" class="FormElement FormElement-input" name="adresse" required>
+                        </div>
+                    </div>
+                    <div class="Form-field">
+                        <div class="Form-labelBlock">
+                            <label for="" class="FormElement FormElement-label">Adresse mail</label>
+                        </div>
+                        <div class="Form-inputBlock">
+                            <input type="email" class="FormElement FormElement-input" name="email">
                         </div>
                     </div>
 
                     <div class="Form-field">
                         <div class="Form-labelBlock">
                             <label for="" class="FormElement FormElement-label">Motif du test</label>
+                            <b style="color:red;">*</b>
                         </div>
                         <div class="Form-inputBlock">
                             <select name="motif_test" id="motif_test" class="form-group">
@@ -103,6 +117,75 @@
                     </div>
 
                     <div class="Form-field" id="hidden_div" style="display: none;">
+
+                        <div class="col-sm-4">
+                            <label>Pays de Destination : </label>
+                            <select id="pays" class="form-control" name="pays">
+                                <option value=""> Pays de Destination </option>
+
+                                <option value=Albanie>Albanie</option>
+                                <option value=Alg&eacute;rie>Alg&eacute;rie</option>
+                                <option value=Allemagne>Allemagne</option>
+                                <option value=Arabie Saoudite>Arabie Saoudite</option>
+                                <option value=Australie>Australie</option>
+                                <option value=Autriche>Autriche</option>
+                                <option value=Bahre&iuml;n>Bahre&iuml;n</option>
+                                <option value=Belgique>Belgique</option>
+                                <option value=Br&eacute;sil>Br&eacute;sil</option>
+                                <option value=Bulgarie>Bulgarie</option>
+                                <option value=Canada>Canada</option>
+                                <option value=Chine>Chine</option>
+                                <option value=Cor&eacute;e du nord>Cor&eacute;e du nord</option>
+                                <option value=Cor&eacute;e du Sud>Cor&eacute;e du Sud</option>
+                                <option value=Croatie>Croatie</option>
+                                <option value=Danemark>Danemark</option>
+                                <option value=Egypte>Egypte</option>
+                                <option value=Emirats arabes unis>Emirats arabes unis</option>
+                                <option value=Espagne>Espagne</option>
+                                <option value=Etats-Unis>Etats-Unis</option>
+                                <option value=Finlande>Finlande</option>
+                                <option value=France>France</option>
+                                <option value=Gabon>Gabon</option>
+                                <option value=Gr&egrave;ce>Gr&egrave;ce</option>
+                                <option value=Hong Kong>Hong Kong</option>
+                                <option value=Hongrie>Hongrie</option>
+                                <option value=Inde>Inde</option>
+                                <option value=Irak>Irak</option>
+                                <option value=Iran>Iran</option>
+                                <option value=Italie>Italie</option>
+                                <option value=Japon>Japon</option>
+                                <option value=Jordanie>Jordanie</option>
+                                <option value=Koue&iuml;t>Koue&iuml;t</option>
+                                <option value=Liban>Liban</option>
+                                <option value=Luxembourg>Luxembourg</option>
+                                <option value=Lybie>Lybie</option>
+                                <option value=Malaisie>Malaisie</option>
+                                <option value=Mali>Mali</option>
+                                <option value=Malte>Malte</option>
+                                <option value=Maroc>Maroc</option>
+                                <option value=Mauritanie>Mauritanie</option>
+                                <option value=Oman>Oman</option>
+                                <option value=Palestine>Palestine</option>
+                                <option value=Pays Bas>Pays Bas</option>
+                                <option value=Philippines>Philippines</option>
+                                <option value=Pologne>Pologne</option>
+                                <option value=Portugal>Portugal</option>
+                                <option value=Qatar>Qatar</option>
+                                <option value=Romanie>Romanie</option>
+                                <option value=Russie>Russie</option>
+                                <option value=S&eacute;n&eacute;gal>S&eacute;n&eacute;gal</option>
+                                <option value=Serbie>Serbie</option>
+                                <option value=Singapour>Singapour</option>
+                                <option value=Su&egrave;de>Su&egrave;de</option>
+                                <option value=Suisse>Suisse</option>
+                                <option value=Sychelles>Sychelles</option>
+                                <option value=Syrie>Syrie</option>
+                                <option value=Thailande>Thailande</option>
+                                <option value=Turquie>Turquie</option>
+                                <option value=Ukraine>Ukraine</option>
+                                <option value=Yemen>Yemen</option>
+                            </select>
+                        </div>
                         <div class="Form-labelBlock">
                             <label for="" class="FormElement FormElement-label">Date voyage</label>
                         </div>

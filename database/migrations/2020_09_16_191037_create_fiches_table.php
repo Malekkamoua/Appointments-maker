@@ -20,7 +20,15 @@ class CreateFichesTable extends Migration
             $table->string("ddn");
             $table->string('sexe');
             $table->string('adresse');
+            $table->string('gsm');
+            $table->string('email')->nullable();
+
             $table->string('motif_test');
+            $table->string('date_voyage')->nullable();
+            $table->string('pays')->nullable();
+
+            $table->string('date_rdv');
+
             $table->unsignedBigInteger('horaire_id');
             $table->timestamps();
         });

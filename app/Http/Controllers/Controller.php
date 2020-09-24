@@ -82,7 +82,13 @@ class Controller extends BaseController
             $fiche_patient->sexe = $request->input('sexe');
             $fiche_patient->ddn = $request->input('ddn');
             $fiche_patient->adresse = $request->input('adresse');
+            $fiche_patient->gsm = $request->input('tel');
+
+            $fiche_patient->email = $request->input('email');
+
             $fiche_patient->motif_test = $request->input('motif_test');
+            $fiche_patient->date_voyage = $request->input('date_voyage');
+            $fiche_patient->pays = $request->input('pays');
 
             if ($request->input('motif_test') == 'voyage') {
 
@@ -183,6 +189,7 @@ class Controller extends BaseController
                 $horaire_patient->save();
 
                 $fiche_patient->horaire_id = $horaire_patient->id;
+                $fiche_patient->date_rdv = $horaire_patient->date. ' '.$horaire_patient->horaire;
                 $fiche_patient->save();
 
 
@@ -278,6 +285,7 @@ class Controller extends BaseController
                 $horaire_patient->save();
 
                 $fiche_patient->horaire_id = $horaire_patient->id;
+                $fiche_patient->date_rdv= $horaire_patient->date. ' '.$horaire_patient->horaire;
                 $fiche_patient->save();
 
 
