@@ -1,83 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <title>Prise rendez-vous</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <link rel="stylesheet" href="../../css/style.css">
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font-->
+    <link rel="stylesheet" type="text/css" href="../../css/opensans-font.css">
+    <link rel="stylesheet" type="text/css" href="../../fonts/line-awesome/css/line-awesome.min.css">
+
+    <!-- Main Style Css -->
+    <link rel="stylesheet" href="../../css/style.css" />
 </head>
 
-<body>
-    <!-- partial:index.partial.html -->
-    <div class="Wrapper">
-        <h2>Enable a bank feed for <b>Default Bank Account</b></h2>
-        <div class="Card Card--horizontalSegments">
-            <div class="Card-segment Card-segment--secondary Card-segment--padded--large Card-segment--grey">
-                <div class="MediaObject MediaObject--verticallyCentered">
-                    <div class="MediaObject-image">
-                        <img src="https://cl.ly/pcdo/Image%202018-02-19%20at%203.07.13%20pm.png" alt="" height="32px"
-                            width="32px">
+<body class="form-v4">
+    <div class="page-content">
+        <div class="form-v4-content">
+            <div class="form-left">
+                <h2>INFOMATION</h2>
+                <p class="text-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut labore et dolore magna aliqua. Et molestie ac feugiat sed. Diam volutpat commodo.</p>
+                <p class="text-2"><span>Eu ultrices:</span> Vitae auctor eu augue ut. Malesuada nunc vel risus commodo
+                    viverra. Praesent elementum facilisis leo vel.</p>
+                <p class="text-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut labore et dolore magna aliqua. Et molestie ac feugiat sed. Diam volutpat commodo.</p>
+                <p class="text-2"><span>Eu ultrices:</span> Vitae auctor eu augue ut. Malesuada nunc vel risus commodo
+                    viverra. Praesent elementum facilisis leo vel. Lorem ipsum </p>
+                <p class="text-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut labore et dolore magna aliqua. Et molestie ac feugiat sed. Diam volutpat commodo.</p>
+
+            </div>
+
+            <form class="form-detail" action="{{action('Controller@createFiche')}}" method="post" id="myform"
+                style="position:relative; top:35px;">
+                <h2>Prise de rendez-vous pour test PCR</h2>
+
+                {{csrf_field()}}
+
+                <input name="_method" type="hidden" value="post">
+                <b style="color:red;">{{$message}}</b>
+                <div class="Form-field">
+                    <div class="Form-labelBlock">
+                        <label for="" class="FormElement FormElement-label">Nom <b style="color:red;">*</b>
+                        </label>
                     </div>
-                    <div class="MediaObject-content">
-                        <h3>Natwest Business Account</h3>
+                    <div class="Form-inputBlock">
+                        <input type="number" class="FormElement FormElement-input" name="tel" required>
                     </div>
                 </div>
-                <p>
-                    Save time manually entering transactions by connecting directly with your NatWest Business Account
-                    and have your transactions imported automatically and securely.
-                </p>
-                <p class="">
-                    <a href="">Bankline and personal bank accounts are not eligible.</a>
-                </p>
                 <br>
-                <br>
-                <br>
-                <p>
-                    <a href="">← Go back</a>
-                </p>
-            </div>
-            <div class="Card-segment Card-segment--padded--large">
 
-                <form action="{{action('Controller@createFiche')}}" method="post" class="Form Form--largeFields">
-                    {{csrf_field()}}
-                    <h3>Confirm your bank account details</h3>
-                    <b style="color:red;"> {{$message}} </b>
-                    <div class="Form-field">
-                        <div class="Form-labelBlock">
-                            <label for="" class="FormElement FormElement-label">Numéro de téléphone</label>
-                        </div>
-                        <div class="Form-inputBlock">
-                            <input type="text" class="FormElement FormElement-input" name="tel">
-                        </div>
+                <div class="Form-field">
+                    <div class="Form-labelBlock">
+                        <label for="" class="FormElement FormElement-label">Nom <b style="color:red;">*</b>
+                        </label>
                     </div>
-
-                    <div class="Form-field">
-                        <div class="Form-labelBlock">
-                            <label for="" class="FormElement FormElement-label">Date de naissance</label>
-                        </div>
-                        <div class="Form-inputBlock">
-                            <input type="date" class="FormElement FormElement-input" name="ddn">
-                        </div>
+                    <div class="Form-inputBlock">
+                        <input type="date" class="FormElement FormElement-input" name="ddn" required>
                     </div>
-
-                    <h3>Connect to your bank</h3>
-                    <p class="Notice Notice--info">
-                        This will take you out of FreeAgent to the NatWest banking website.
-                    </p>
-                    <p>
-                        You will need your usual online banking details. Once logged in, you will be asked to review
-                        Terms and Conditions and confirm or decline your agreement, before being returned automatically
-                        to your FreeAgent account.
-                    </p>
-                    <button class="fe-Button fe-Button--primary fe-Button--large">Suivant</button>
-                </form>
-            </div>
+                </div>
+                <br>
+                <div class="form-row-last" style="padding: 12%;position: relative;top: -14px;
+">
+                    <input type="submit" name="register" class="btn btn-info" value="Register" style="float:right;">
+                </div>
         </div>
-    </div>
-    <!-- partial -->
 
+        </form>
+    </div>
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.js">
+    </script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js">
+    </script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+    <script>
+        jQuery.browser = {};
+        (function () {
+            jQuery.browser.msie = false;
+            jQuery.browser.version = 0;
+            if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+                jQuery.browser.msie = true;
+                jQuery.browser.version = RegExp.$1;
+            }
+        })();
+
+        document.getElementById('motif_test').addEventListener('change', function () {
+            var style = this.value == 'voyage' ? 'block' : 'none';
+            document.getElementById('hidden_div').style.display = style;
+        });
+
+    </script>
 </body>
 
 </html>
