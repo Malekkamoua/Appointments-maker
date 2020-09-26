@@ -20,41 +20,57 @@
     <div class="page-content">
         <div class="form-v4-content">
             <div class="form-left">
-                <h2>INFOMATION</h2>
-                <p class="text-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua. Et molestie ac feugiat sed. Diam volutpat commodo.</p>
-                <p class="text-2"><span>Eu ultrices:</span> Vitae auctor eu augue ut. Malesuada nunc vel risus commodo
-                    viverra. Praesent elementum facilisis leo vel.</p>
-                <p class="text-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua. Et molestie ac feugiat sed. Diam volutpat commodo.</p>
-                <p class="text-2"><span>Eu ultrices:</span> Vitae auctor eu augue ut. Malesuada nunc vel risus commodo
-                    viverra. Praesent elementum facilisis leo vel.</p>
-                <p class="text-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua. Et molestie ac feugiat sed. Diam volutpat commodo.</p>
-                <p class="text-2"><span>Eu ultrices:</span> Vitae auctor eu augue ut. Malesuada nunc vel risus commodo
-                    viverra. Praesent elementum facilisis leo vel.</p>
+                <div style="display:flex;padding:5%;">
+                    <img src="../../3acb05f8332bf07e11b4d7f552d90224_110x110.jpg" alt="aaa">
+                    <h2 style="margin:5%;">Laboratoire Barouni</h2>
+                </div>
+                <h3>Information</h3>
+
+                <p class="text-1">
+                    Afin d’assurer la sécurité de non contamination aux patients conventionnels et de nos équipes, nous
+                    avons décidé de mettre en place des circuits dédiés pour les prélèvements COVID-19. Ce système
+                    permet d’éviter les contacts entre chaque personne tout en assurant notre devoir de santé publique
+                    pour vous accompagner dans vos analyses.
+                </p>
+                <p class="text-2"><span><b>Important:</b></span>
+                    <ul>
+                        <li>Si vous êtes en confinement et que vous souhaitez vous faire tester pour la COVID-19, merci
+                            de nous appeler sur le numéro : 999999
+                        </li>
+                        <li>
+                            Toute personne qui se présente sans rendez-vous ne sera pas prise en charge.
+                        </li>
+
+                </p>
+                </ul>
+                <p class="text-1">
+                    Le résultat du test est disponible après 48h. Les résultats des tests RT-PCR Covid-19 sont
+                    consultables sur le site web <a href="https://barounilab.com/"><b
+                            style="color:red;font-weight:bolder;">www.barounilab.com</b></a>
+                </p>
             </div>
+
             <form class="form-detail" action="{{action('Controller@annulerRdv')}}" method="post" id="myform">
-            <h2>Prise de rendez-vous pour test PCR</h2>
+                <h2>Prise de rendez-vous pour test PCR</h2>
 
                 <div class="alert alert-info" role="alert" style="position:relative; top:30px;">
-                
-                    <h4 class="alert-heading">Well done!</h4>
+
+                    <h4 class="alert-heading">Rendez-vous fixé</h4>
                     <p> {{$message}}</p>
                     <hr>
-                    <p class="mb-0">Si vous avez une question, veuillez appeler +216 71 58 45 23.
+                    <p class="mb-0">Si vous avez des questions, veuillez appeler +216 71 58 45 23.
                     </p>
                 </div>
 
                 <br>
 
                 @if($fiche != null)
-                    {{csrf_field()}}
-                    <input name="_method" type="hidden" value="post">
-                    <input type="hidden" name="tel" value="{{$fiche->gsm}}">
-                    <button class="btn btn-danger" type="submit">Annuler rendez-vous</button>
-                </form>
-                @endif
+                {{csrf_field()}}
+                <input name="_method" type="hidden" value="post">
+                <input type="hidden" name="tel" value="{{$fiche->gsm}}">
+                <button class="btn btn-danger" type="submit">Annuler rendez-vous</button>
+            </form>
+            @endif
             </form>
         </div>
     </div>

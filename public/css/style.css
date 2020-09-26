@@ -1,10 +1,10 @@
 body {
 	margin:  0;
+	background-color: rgb(231, 227, 227);
 }
 .page-content {
 	width: 100%;
 	margin:  0 auto;
-	background: #75e2e9;
 	display: flex;
 	display: -webkit-flex;
 	justify-content: center;
@@ -20,7 +20,7 @@ body {
 }
 .form-v4-content  {
 	background: #fff;
-	width: 850px;
+	width: 1200px;
 	border-radius: 10px;
 	-o-border-radius: 10px;
 	-ms-border-radius: 10px;
@@ -31,7 +31,7 @@ body {
 	-ms-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
 	-moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
 	-webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
-	margin: 15px 0;
+	margin: 35px 0;
 	position: relative;
 	display: flex;
 	display: -webkit-flex;
@@ -49,7 +49,7 @@ body {
 	border-bottom-left-radius: 10px;
 	padding: 20px 40px;
 	position: relative;
-	width: 100%;
+	width: 50%;
 	color: #fff;
 }
 .form-v4-content .form-left p {
@@ -278,7 +278,7 @@ body {
 /* Responsive */
 @media screen and (max-width: 991px) {
 	.form-v4-content {
-		margin: 180px 20px;
+		margin: 10px 20px;
 		flex-direction:  column;
 		-o-flex-direction:  column;
 		-ms-flex-direction:  column;
@@ -295,6 +295,32 @@ body {
 	    width: auto;
 	}
 }
+
+.Notice {
+	background-color: #f5f6f7;
+	border-left: 2px solid #b4bcc1;
+	box-sizing: border-box;
+	/* 1 */
+	clear: both;
+	color: #181a1b;
+	display: block;
+	font-weight: 500;
+	line-height: 140%;
+	margin: 0 0 16px;
+	padding: 12px;
+	width: -webkit-fit-content;
+	width: -moz-fit-content;
+	width: fit-content;
+	position: relative;
+    top: -20px;
+  }
+  
+.Notice--info {
+	background-color: #e3f3fc;
+	border-color: #005896;
+	color: #005896;
+  }
+  
 @media screen and (max-width: 575px) {
 	.form-v4-content .form-detail .form-group {
 		flex-direction: column;

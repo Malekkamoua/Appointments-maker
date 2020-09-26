@@ -36,6 +36,20 @@ class Controller extends BaseController
 
         $existe = false;
 
+        $fiche = Fiche::where([
+            'gsm' => $tel])->first();
+        
+        if ($fiche != null) {
+            if ($fiche->ddn != $ddn) {
+
+                $message = "Accés interdit. Veuillez verifier vos coordonnées.";
+
+                return view('login', [
+                    'message' => $message
+                ]);
+            }
+        }
+
         $horaire = Horaire::where('gsm',$tel)->first();
 
         if ($horaire != null) {
@@ -94,9 +108,9 @@ class Controller extends BaseController
 
                 $d = $request->input('date_voyage');
 
-                $pieces = explode(" ", $d);
-                $pieces = explode("/", $pieces[0]);
-        
+                $pieces = explode("-", $d);
+                
+
                 $date_voyage = Carbon::createFromDate($pieces[0], $pieces[1], $pieces[2]);
                 $date_voyage->toDateString();
 
