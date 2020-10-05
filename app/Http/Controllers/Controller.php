@@ -142,7 +142,9 @@ class Controller extends BaseController
                 $date_dispo_init->subDays(2);
                 $date_dispo_init->toDateString();
 
-                $date_dispo =  Horaire::where('date', '<=', $date_dispo_init)->where('gsm', null)->orderBy('id', 'DESC')->first();
+                $date_dispo =  Horaire::where('date', '>=', $date_dispo_init)->where('gsm', null)->orderBy('date', 'ASC')
+                ->orderBy('horaire', 'ASC')
+                ->first();
 
                 if($date_dispo == null ) {
 
