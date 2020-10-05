@@ -61,10 +61,13 @@ class Controller extends BaseController
 
             if ($fiche != null) {
                 
-                $date = $horaire->date;
                 
-                $message = 'Votre rendez-vous est fixé à la date: '.$horaire->date. ' '.$horaire->horaire;
+                $dat = $horaire->date;                
+                $pieces = explode("-", $dat);
+                $h = substr($horaire->horaire,0,5); 
 
+                $message = '<br> <b> Date </b>: '.$pieces[2].'/'.$pieces[1].'/'.$pieces[0]. ' <br> <b> Heure </b> : '.$h;
+                
                 return view('recu', [
                     'fiche' =>$fiche,
                     'message' => $message,
@@ -121,7 +124,7 @@ class Controller extends BaseController
 
                 if($date_dispo_init == null ) {
 
-                    $message = 'Aucune date n\'est disponible pour l\'instant. Veuillez appeler le +216 457852688 . ';
+                    $message = 'Aucune date n\'est disponible pour l\'instant. Veuillez appeler le 23 707 465 . ';
 
                     return view('recu', [
                         'message' => $message,
@@ -143,7 +146,7 @@ class Controller extends BaseController
 
                 if($date_dispo == null ) {
 
-                    $message = 'Aucune date n\'est disponible pour l\'instant. Veuillez appeler le +216 457852688 . ';
+                    $message = 'Aucune date n\'est disponible pour l\'instant. Veuillez appeler le 23 707 465 . ';
 
                     return view('recu', [
                         'message' => $message,
@@ -159,7 +162,7 @@ class Controller extends BaseController
 
                 if($date_dispo == null || $date_dispo->lte(Carbon::today()) ) {
 
-                    $message = 'Aucune date n\'est disponible pour l\'instant. Veuillez appeler le +216 457852688 . ';
+                    $message = 'Aucune date n\'est disponible pour l\'instant. Veuillez appeler le 23 707 465 . ';
 
                     return view('recu', [
                         'message' => $message,
@@ -190,7 +193,7 @@ class Controller extends BaseController
                 
                     if ($horaire_patient == null) {
                 
-                        $message = 'Aucune date n\'est disponible pour l\'instant. Veuillez appeler le +216 457852688 . ';
+                        $message = 'Aucune date n\'est disponible pour l\'instant. Veuillez appeler le 23 707 465 . ';
 
                         return view('recu', [
                             'message' => $message,
@@ -206,8 +209,11 @@ class Controller extends BaseController
                 $fiche_patient->date_rdv = $horaire_patient->date. ' '.$horaire_patient->horaire;
                 $fiche_patient->save();
 
+                $dat = $horaire_patient->date;                
+                $pieces = explode("-", $dat);
+                $h = substr($horaire_patient->horaire,0,5); 
 
-                $message = 'Votre rendez-vous est fixé à la date: '.$horaire_patient->date. ' '.$horaire_patient->horaire;
+                $message = '<br> <b> Date </b>: '.$pieces[2].'/'.$pieces[1].'/'.$pieces[0]. ' <br> <b> Heure </b> : '.$h;
 
                 return view('recu', [
                     'message' => $message,
@@ -225,7 +231,7 @@ class Controller extends BaseController
                 
                 if($date_dispo_init == null ) {
 
-                    $message = 'Aucune date n\'est disponible pour l\'instant. Veuillez appeler le +216 457852688 . ';
+                    $message = 'Aucune date n\'est disponible pour l\'instant. Veuillez appeler le 23 707 465 . ';
 
                     return view('recu', [
                         'message' => $message,
@@ -245,8 +251,10 @@ class Controller extends BaseController
                 
                 $date_to_string = $date_dispo_init->toDateString();
 
-                $date_dispo =  Horaire::where('date', '>=', $date_to_string)->where('gsm', null)->first();
-                
+                $date_dispo =  Horaire::where('date', '>=', $date_to_string)->where('gsm', null)->orderBy('date', 'ASC')
+                ->orderBy('horaire', 'ASC')
+                ->first();
+
                 $pieces = explode("-", $date_dispo->date);
 
                 $date_dispo_rech = $date_dispo;
@@ -256,7 +264,7 @@ class Controller extends BaseController
 
                 if($date_dispo == null || $date_dispo->lte(Carbon::today()) ) {
 
-                    $message = 'Aucune date n\'est disponible pour l\'instant. Veuillez appeler le +216 457852688 . ';
+                    $message = 'Aucune date n\'est disponible pour l\'instant. Veuillez appeler le 23 707 465 . ';
 
                     return view('recu', [
                         'message' => $message,
@@ -286,7 +294,7 @@ class Controller extends BaseController
                 
                     if ($horaire_patient == null) {
                 
-                        $message = 'Aucune date n\'est disponible pour l\'instant. Veuillez appeler le +216 457852688 . ';
+                        $message = 'Aucune date n\'est disponible pour l\'instant. Veuillez appeler le 23 707 465 . ';
 
                         return view('recu', [
                             'message' => $message,
@@ -303,7 +311,12 @@ class Controller extends BaseController
                 $fiche_patient->save();
 
 
-                $message = 'Votre rendez-vous est fixé à la date: '.$horaire_patient->date. ' '.$horaire_patient->horaire;
+                $dat = $horaire_patient->date;                
+                $pieces = explode("-", $dat);
+                $h = substr($horaire_patient->horaire,0,5); 
+
+                $message = '<br> <b> Date </b>: '.$pieces[2].'/'.$pieces[1].'/'.$pieces[0]. ' <br> <b> Heure </b> : '.$h;
+
 
                 return view('recu', [
                     'message' => $message,

@@ -36,7 +36,7 @@
                 <p class="text-2"><span><b>Important:</b></span>
                     <ul>
                         <li>Si vous êtes en confinement et que vous souhaitez vous faire tester pour la COVID-19, merci
-                            de nous appeler sur le numéro : 999999
+                            de nous appeler sur le numéro : 23 707 465
                         </li>
                         <li>
                             Toute personne qui se présente sans rendez-vous ne sera pas prise en charge.
@@ -85,17 +85,14 @@
                 </div>
                 <br>
                 <div class="form-row-last">
-                    <input type="submit" name="Suivant" class="btn btn-info" value="Register"
+                    <input type="submit" name="Suivant" class="btn btn-info" value="Suivant"
                         style="width: 100px;height: 45px;top: -29px;color: white;">
                 </div>
                 <br> <br>
                 <p class="Notice Notice--info">
-                    This will take you out of FreeAgent to the NatWest banking website.
-                </p>
-                <p style="position: relative;top: -15px;">
-                    You will need your usual online banking details. Once logged in, you will be asked to review Terms
-                    and Conditions and confirm or decline your agreement, before being returned automatically to your
-                    FreeAgent account.
+                     Le résultat du test est disponible après 48h. Les résultats des tests RT-PCR Covid-19 sont
+                    consultables sur le site web <a href="https://barounilab.com/" target="_blank"><b
+                            style="color:red;font-weight:bolder;">www.barounilab.com</b></a>
                 </p>
         </div>
         </form>

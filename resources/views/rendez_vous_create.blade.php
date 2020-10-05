@@ -22,7 +22,7 @@
             <div class="form-left">
                 <div style="display:flex;padding:5%;">
                     <img src="../../3acb05f8332bf07e11b4d7f552d90224_110x110.jpg" alt="aaa">
-                    <h2 style="margin:5%;">Laboratoire Barouni</h2>
+                    <h2 style="margin:5%;">Laboratoire Najib Barouni</h2>
                 </div>
                 <h3>Information</h3>
 
@@ -35,7 +35,7 @@
                 <p class="text-2"><span><b>Important:</b></span>
                     <ul>
                         <li>Si vous êtes en confinement et que vous souhaitez vous faire tester pour la COVID-19, merci
-                            de nous appeler sur le numéro : 999999
+                            de nous appeler sur le numéro : 23 707 465
                         </li>
                         <li>
                             Toute personne qui se présente sans rendez-vous ne sera pas prise en charge.
@@ -51,7 +51,7 @@
         </div>
 
         <form class="form-detail" action="{{action('Controller@storeFiche')}}" method="post" id="myform">
-            <h2>Prise de rendez-vous pour test PCR</h2>
+            <h2>PRISE DE RENDEZ-VOUS POUR LE TEST DE DÉPISTAGE COVID-19 (RT-PCR)</h2>
 
             {{csrf_field()}}
 
@@ -63,7 +63,7 @@
                     </label>
                 </div>
                 <div class="Form-inputBlock">
-                    <input type="text" class="FormElement FormElement-input" name="nom" required>
+                    <input type="text" class="FormElement FormElement-input" name="nom" required style="text-transform: capitalize;">
                 </div>
             </div>
             <br>
@@ -73,7 +73,7 @@
                     </label>
                 </div>
                 <div class="Form-inputBlock">
-                    <input type="text" class="FormElement FormElement-input" name="prenom" required>
+                    <input type="text" class="FormElement FormElement-input" name="prenom" required style="text-transform: capitalize;">
                 </div>
             </div>
             <br>
@@ -204,7 +204,7 @@
             <input type="hidden" name="ddn" value="{{$ddn}}">
 
             <div class="form-row-last">
-                <input type="submit" class="register" value="Suivant" style="float:right;">
+                <input type="submit" class="register" value="Valider" style="float:right;">
             </div>
 
         </form>

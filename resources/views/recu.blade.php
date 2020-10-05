@@ -22,7 +22,7 @@
             <div class="form-left">
                 <div style="display:flex;padding:5%;">
                     <img src="../../3acb05f8332bf07e11b4d7f552d90224_110x110.jpg" alt="aaa">
-                    <h2 style="margin:5%;">Laboratoire Barouni</h2>
+                    <h2 style="margin:5%;">Laboratoire Najib Barouni</h2>
                 </div>
                 <h3>Information</h3>
 
@@ -35,7 +35,7 @@
                 <p class="text-2"><span><b>Important:</b></span>
                     <ul>
                         <li>Si vous êtes en confinement et que vous souhaitez vous faire tester pour la COVID-19, merci
-                            de nous appeler sur le numéro : 999999
+                            de nous appeler sur le numéro : 23 707 465
                         </li>
                         <li>
                             Toute personne qui se présente sans rendez-vous ne sera pas prise en charge.
@@ -51,18 +51,20 @@
             </div>
 
             <form class="form-detail" action="{{action('Controller@annulerRdv')}}" method="post" id="myform">
-                <h2>Prise de rendez-vous pour test PCR</h2>
+                <h2>PRISE DE RENDEZ-VOUS POUR LE TEST DE DÉPISTAGE COVID-19 (RT-PCR)</h2>
 
                 <div class="alert alert-info" role="alert" style="position:relative; top:30px;">
 
-                    <h4 class="alert-heading">Rendez-vous fixé</h4>
-                    <p> {{$message}}</p>
+                    <h4 class="alert-heading">Votre rendez-vous est fixé pour le:</h4>
+                    <p> {!! $message !!}</p>
                     <hr>
-                    <p class="mb-0">Si vous avez des questions, veuillez appeler +216 71 58 45 23.
+                    <p class="mb-0">
+                        Prière se présenter 15 minutes avant votre rendez-vous pour les formalités d'inscription et paiement. <br><br>
+                        Si vous avez des questions, veuillez appeler le 23 707 465.
                     </p>
                 </div>
 
-                <br>
+                <br><br>
 
                 @if($fiche != null)
                 {{csrf_field()}}
