@@ -229,8 +229,12 @@ class Controller extends BaseController
                 $date = Carbon::today()->toDateString();
 
                 //voir disponibilité initiale de la date
-                $date_dispo_init = Horaire::where('date', '>=', $date)->where('gsm', null)->first();
-                
+                $date_dispo_init = Horaire::where('date', '>=', $date)->where('gsm', null)->orderBy('date', 'ASC')
+                ->orderBy('horaire', 'ASC')
+                ->first();
+
+               
+
                 if($date_dispo_init == null ) {
 
                     $message = 'Aucune date n\'est disponible pour l\'instant. Veuillez appeler le 23 707 465 . ';
@@ -248,7 +252,6 @@ class Controller extends BaseController
                 $date_dispo_init = Carbon::createFromDate($pieces[0], $pieces[1], $pieces[2]);
 
                 //Soustraire deux jours et verifier la disponibilité à nouveau
-                $date_dispo_init->addDays(1);
                 $date_dispo_init->toDateString();
                 
                 $date_to_string = $date_dispo_init->toDateString();
@@ -256,6 +259,7 @@ class Controller extends BaseController
                 $date_dispo =  Horaire::where('date', '>=', $date_to_string)->where('gsm', null)->orderBy('date', 'ASC')
                 ->orderBy('horaire', 'ASC')
                 ->first();
+
 
                 $pieces = explode("-", $date_dispo->date);
 
