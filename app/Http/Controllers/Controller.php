@@ -120,7 +120,10 @@ class Controller extends BaseController
                 $date = $date_voyage;
 
                 //voir disponibilité initiale de la date
-                $date_dispo_init = Horaire::where('date', '<=', $date)->where('gsm', null)->orderBy('id', 'DESC')->first();
+                $date_dispo_init = Horaire::where('date', '<=', $date)->where('gsm', null)->orderBy('date', 'DESC')
+                ->orderBy('horaire', 'DESC')
+                ->first();
+
 
                 if($date_dispo_init == null ) {
 
@@ -139,12 +142,13 @@ class Controller extends BaseController
                 $date_dispo_init = Carbon::createFromDate($pieces[0], $pieces[1], $pieces[2]);
 
                 //Soustraire deux jours et verifier la disponibilité à nouveau
-                $date_dispo_init->subDays(2);
+                $date_dispo_init->subDays(2); //13
                 $date_dispo_init->toDateString();
 
-                $date_dispo =  Horaire::where('date', '>=', $date_dispo_init->toDateString())->where('gsm', null)->orderBy('date', 'ASC')
-                ->orderBy('horaire', 'ASC')
+                $date_dispo =  Horaire::where('date', '<=', $date_dispo_init->toDateString())->where('gsm', null)->orderBy('date', 'DESC')
+                ->orderBy('horaire', 'DESC')
                 ->first();
+
 
                 if($date_dispo == null ) {
 
@@ -232,8 +236,6 @@ class Controller extends BaseController
                 $date_dispo_init = Horaire::where('date', '>=', $date)->where('gsm', null)->orderBy('date', 'ASC')
                 ->orderBy('horaire', 'ASC')
                 ->first();
-
-               
 
                 if($date_dispo_init == null ) {
 
