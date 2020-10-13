@@ -120,7 +120,7 @@ class Controller extends BaseController
                 $date = $date_voyage;
 
                 //voir disponibilité initiale de la date
-                $date_dispo_init = Horaire::where('date', '<=', $date)->where('gsm', null)->orderBy('date', 'DESC')
+                $date_dispo_init = Horaire::where('date', '<=', $date)->where('Nature', '=',  'V' )->where('gsm', null)->orderBy('date', 'DESC')
                 ->orderBy('horaire', 'DESC')
                 ->first();
 
@@ -144,11 +144,10 @@ class Controller extends BaseController
                 //Soustraire deux jours et verifier la disponibilité à nouveau
                 $date_dispo_init->subDays(2); //13
                 $date_dispo_init->toDateString();
-
-                $date_dispo =  Horaire::where('date', '<=', $date_dispo_init->toDateString())->where('gsm', null)->orderBy('date', 'DESC')
-                ->orderBy('horaire', 'DESC')
+                
+                $date_dispo =  Horaire::where('date', '<=', $date_dispo_init->toDateString())->where('Nature', '=',  'V' )->where('gsm', null)->orderBy('date', 'DESC')
+                ->orderBy('horaire', 'ASC')
                 ->first();
-
 
                 if($date_dispo == null ) {
 
@@ -182,7 +181,8 @@ class Controller extends BaseController
                     $horaire_patient = Horaire::where([
                         'gsm' => $request->input('tel'),
                         'date' =>$date_dispo_rech->date
-                    ])->first();
+                    ])->where('Nature', '=',  'V' )->orderBy('date', 'DESC')
+                    ->orderBy('horaire', 'ASC')->first();
                     
                     $message = 'Un rendez-vous ancien est déja enregistré avec ce numéro de téléphone. Connectez-vous avec votre numéro et date de naissance pour savoir votre date exacte';
 
@@ -195,8 +195,9 @@ class Controller extends BaseController
                     $horaire_patient = Horaire::where([
                         'gsm' => null,
                         'date' =>$date_dispo_rech->date
-                    ])->first();
-                
+                    ])->where('Nature', '=',  'V' )->orderBy('date', 'DESC')
+                    ->orderBy('horaire', 'ASC')->first();
+
                     if ($horaire_patient == null) {
                 
                         $message = 'Aucune date n\'est disponible pour l\'instant. Veuillez appeler le 23 707 465 . ';
@@ -233,7 +234,7 @@ class Controller extends BaseController
                 $date = Carbon::today()->toDateString();
 
                 //voir disponibilité initiale de la date
-                $date_dispo_init = Horaire::where('date', '>=', $date)->where('gsm', null)->orderBy('date', 'ASC')
+                $date_dispo_init = Horaire::where('date', '>=', $date)->where('Nature', '!=',  'V' )->where('gsm', null)->orderBy('date', 'ASC')
                 ->orderBy('horaire', 'ASC')
                 ->first();
 
@@ -258,7 +259,7 @@ class Controller extends BaseController
                 
                 $date_to_string = $date_dispo_init->toDateString();
 
-                $date_dispo =  Horaire::where('date', '>=', $date_to_string)->where('gsm', null)->orderBy('date', 'ASC')
+                $date_dispo =  Horaire::where('date', '>=', $date_to_string)->where('Nature', '!=',  'V' )->where('gsm', null)->orderBy('date', 'ASC')
                 ->orderBy('horaire', 'ASC')
                 ->first();
 
@@ -285,7 +286,8 @@ class Controller extends BaseController
                     $horaire_patient = Horaire::where([
                         'gsm' => $request->input('tel'),
                         'date' =>$date_dispo_rech->date
-                    ])->first();
+                    ])->where('Nature', '!=',  'V' )->orderBy('date', 'ASC')
+                    ->orderBy('horaire', 'ASC')->first();
                     
                     $message = 'Un rendez-vous ancien est déja enregistré avec ce numéro de téléphone. Connectez-vous avec votre numéro et date de naissance pour savoir votre date exacte';
 
@@ -298,7 +300,8 @@ class Controller extends BaseController
                     $horaire_patient = Horaire::where([
                         'gsm' => null,
                         'date' =>$date_dispo_rech->date
-                    ])->first();
+                    ])->where('Nature', '!=',  'V' )->orderBy('date', 'ASC')
+                    ->orderBy('horaire', 'ASC')->first();
                 
                     if ($horaire_patient == null) {
                 
