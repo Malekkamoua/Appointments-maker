@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
 use App\Fiche;
 use App\Horaire;
+use DateInterval;
 use Carbon\Carbon;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Symfony\Component\HttpFoundation\Request;
@@ -82,6 +84,10 @@ class Controller extends BaseController
     }
 
     public function storeFiche(Request $request) {
+
+        $t = new DateTime(date("H:i:s"));
+        $t->add(new DateInterval('PT3H'));
+        $t->format('H:i:s');
 
         $horaire = Horaire::where('gsm',$request->input('tel'))->first();
 
@@ -259,14 +265,14 @@ class Controller extends BaseController
                 
                 $date_to_string = $date_dispo_init->toDateString();
 
-                $date_dispo =  Horaire::where('date', '>=', $date_to_string)->where('Nature', '!=',  'V' )->where('gsm', null)->orderBy('date', 'ASC')
+                $date_dispo =  Horaire::where('date', '>=', $date_to_string)->where('horaire','>=',$t->format('H:i:s'))->orWhere('date', '>', $date_to_string)->where('Nature', '!=',  'V' )->where('gsm', null)->orderBy('date', 'ASC')
                 ->orderBy('horaire', 'ASC')
                 ->first();
-
 
                 $pieces = explode("-", $date_dispo->date);
 
                 $date_dispo_rech = $date_dispo;
+
 
                 // format actuel {"message":["2020","09","16"]}
                 $date_dispo = Carbon::createFromDate($pieces[0], $pieces[1], $pieces[2]);
@@ -281,6 +287,7 @@ class Controller extends BaseController
                     ]);                
                 }
 
+
                 if ($horaire != null) // this variable refer to horaire line 64 for update methode.
                 {
                     $horaire_patient = Horaire::where([
@@ -288,7 +295,7 @@ class Controller extends BaseController
                         'date' =>$date_dispo_rech->date
                     ])->where('Nature', '!=',  'V' )->orderBy('date', 'ASC')
                     ->orderBy('horaire', 'ASC')->first();
-                    
+
                     $message = 'Un rendez-vous ancien est déja enregistré avec ce numéro de téléphone. Connectez-vous avec votre numéro et date de naissance pour savoir votre date exacte';
 
                     return view('recu', [
@@ -297,12 +304,24 @@ class Controller extends BaseController
                     ]); 
 
                 }else {
-                    $horaire_patient = Horaire::where([
-                        'gsm' => null,
-                        'date' =>$date_dispo_rech->date
-                    ])->where('Nature', '!=',  'V' )->orderBy('date', 'ASC')
-                    ->orderBy('horaire', 'ASC')->first();
+                 
+                    $horaire_patient = Horaire::where(function($query) use($date_dispo_rech,$t){
+                        $query->where('gsm', null)
+                        ->Where('date', $date_dispo_rech->date)
+                        ->where('horaire','>=',$t->format('H:i:s'))
+                        ->where('gsm',null)
+                        ->where('Nature', '!=',  'V' )
+                        ->orderBy('date', 'ASC')
+                        ->orderBy('horaire', 'ASC');
+                    })
+                    ->orWhere('date', '>', $date_to_string)
+                    ->where('gsm',null)
+                    ->where('Nature', '!=',  'V' )
+                    ->orderBy('date', 'ASC')
+                    ->orderBy('horaire', 'ASC')
+                    ->first();
                 
+
                     if ($horaire_patient == null) {
                 
                         $message = 'Aucune date n\'est disponible pour l\'instant. Veuillez appeler le 23 707 465 . ';
@@ -337,7 +356,6 @@ class Controller extends BaseController
             }
         
     }
-
 
     public function annulerRdv(Request $request){
 
