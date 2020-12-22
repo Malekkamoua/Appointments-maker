@@ -148,7 +148,7 @@ class Controller extends BaseController
                 $date_dispo_init = Carbon::createFromDate($pieces[0], $pieces[1], $pieces[2]);
 
                 //Soustraire deux jours et verifier la disponibilité à nouveau
-                $date_dispo_init->subDays(2); //13
+                $date_dispo_init->subDays(1); 
                 $date_dispo_init->toDateString();
                 
                 $date_dispo =  Horaire::where('date', '<=', $date_dispo_init->toDateString())->where('Nature', '=',  'V' )->where('gsm', null)->orderBy('date', 'DESC')
@@ -187,8 +187,10 @@ class Controller extends BaseController
                     $horaire_patient = Horaire::where([
                         'gsm' => $request->input('tel'),
                         'date' =>$date_dispo_rech->date
-                    ])->where('Nature', '=',  'V' )->orderBy('date', 'DESC')
-                    ->orderBy('horaire', 'ASC')->first();
+                    ])->where('Nature', '=',  'V' )
+                    ->orderBy('date', 'DESC')
+                    ->orderBy('horaire', 'ASC')
+                    ->first();
                     
                     $message = 'Un rendez-vous ancien est déja enregistré avec ce numéro de téléphone. Connectez-vous avec votre numéro et date de naissance pour savoir votre date exacte';
 
@@ -198,11 +200,49 @@ class Controller extends BaseController
                     ]); 
 
                 }else {
-                    $horaire_patient = Horaire::where([
-                        'gsm' => null,
-                        'date' =>$date_dispo_rech->date
-                    ])->where('Nature', '=',  'V' )->orderBy('date', 'DESC')
-                    ->orderBy('horaire', 'ASC')->first();
+
+                    if ($date_dispo->isToday()){
+
+                        $horaire_patient =  Horaire::where(function($query) use($date_dispo_rech,$t){
+                            $query->where('gsm', null)
+                            ->Where('date', $date_dispo_rech->date)
+                            ->where('horaire','>=',$t->format('H:i:s'))
+                            ->where('gsm',null)
+                            ->where('Nature', '=',  'V' )
+                            ->orderBy('date', 'DESC')
+                            ->orderBy('horaire', 'DESC');
+                        })
+                            ->orWhere('date', '<', $date_dispo_rech->date)
+                            ->where('gsm',null)
+                            ->where('Nature', '=',  'V' )
+                            ->orderBy('date', 'DESC')
+                            ->orderBy('horaire', 'DESC')
+                            ->first();
+
+                            $pieces = explode("-", $horaire_patient->date);
+                            $horaire_patient_c = Carbon::createFromDate($pieces[0], $pieces[1], $pieces[2]);
+            
+                        if ($horaire_patient_c->lte(Carbon::today()) ) {
+
+                            $message = 'Aucune date n\'est disponible pour l\'instant. Veuillez appeler le 23 707 465 . ';
+        
+                            return view('recu', [
+                                'message' => $message,
+                                'fiche' =>null
+                            ]);                
+    
+                        }
+
+                    }else{
+
+                        $horaire_patient = Horaire::where([
+                            'gsm' => null,
+                            'date' =>$date_dispo_rech->date
+                        ])->where('Nature', '=',  'V' )
+                        ->orderBy('date', 'DESC')
+                        ->orderBy('horaire', 'ASC')
+                        ->first();
+                    }
 
                     if ($horaire_patient == null) {
                 
