@@ -51,7 +51,7 @@
                 </p>
             </div>
 
-            <form class="form-detail" action="{{action('Controller@createFiche')}}" method="post" id="myform"
+            <form class="form-detail" action="{{action('newController@createFiche')}}" method="post" id="myform"
                 style="position:relative; top:35px;">
                 <h2 style="position: relative;top: -35px;">PRISE DE RENDEZ-VOUS POUR LE TEST DE DÉPISTAGE COVID-19
                     (RT-PCR)
@@ -119,12 +119,10 @@
                 jQuery.browser.version = RegExp.$1;
             }
         })();
-
         document.getElementById('motif_test').addEventListener('change', function () {
             var style = this.value == 'voyage' ? 'block' : 'none';
             document.getElementById('hidden_div').style.display = style;
         });
-
     </script>
 </body>
 

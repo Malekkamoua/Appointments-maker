@@ -11,12 +11,32 @@
 |
 */
 
-Route::get('/', 'Controller@login')->name('login');
- 
-Route::post('/rendez-vous-covid', 'Controller@createFiche')->name('createFiche');
+Route::get('/', 'newController@login')->name('login');
 
-Route::post('/rendez-vous-covid/engerister', 'Controller@storeFiche')->name('storeFiche');
+Route::get('/calendar', 'newController@test')->name('test');
 
-Route::post('/rendez-vous-covid/annuler', 'Controller@annulerRdv')->name('annulerRdv');
+Route::post('/findDates', 'newController@findDates');
+Route::post('/findTimes', 'newController@findTimes');
+
+Route::post('/create', 'newController@createFiche')->name('createFiche');
+Route::post('/store', 'newController@storeFiche')->name('storeFiche');
+Route::get('/generate-pdf','newController@generatePDF');
+
+Route::get('qrcode_blade', function () {
+    return view('qr-code');
+});
+
+Route::get('pdf', function () {
+
+    return PDF::loadView('login')->inline('github.pdf');
+
+});
+
+Route::post('/annuler', 'newController@annulerRdv')->name('annulerRdv');
+
+// Route::post('/rendez-vous-covid', 'Controller@createFiche')->name('createFiche');
+
+// Route::post('/rendez-vous-covid/engerister', 'Controller@storeFiche')->name('storeFiche');
+
 
 

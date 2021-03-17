@@ -44,13 +44,13 @@
                 </p>
                 </ul>
                 <p class="text-1">
-                    Le résultat du test est disponible après 48h. Les résultats des tests RT-PCR Covid-19 sont
+                    Le résultat du test est disponible après 24h. Les résultats des tests RT-PCR Covid-19 sont
                     consultables sur le site web <a href="https://barounilab.com/"><b
                             style="color:red;font-weight:bolder;">www.barounilab.com</b></a>
                 </p>
             </div>
 
-            <form class="form-detail" action="{{action('Controller@annulerRdv')}}" method="post" id="myform">
+            <form class="form-detail" action="{{action('newController@annulerRdv')}}" method="post" id="myform">
                 <h2>PRISE DE RENDEZ-VOUS POUR LE TEST DE DÉPISTAGE COVID-19 (RT-PCR)</h2>
 
                 <div class="alert alert-info" role="alert" style="position:relative; top:30px;">

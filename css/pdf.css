@@ -1,0 +1,55 @@
+.type {
+    font-size: 12px;
+}
+
+.content {
+    max-width: 29%;
+    margin: auto;
+    background: white;
+    padding: 10px;
+}
+
+.img1 {
+    text-align: center;
+}
+
+.imgs {
+    position: relative;
+    top: -35px;
+}
+
+.bigDiv {
+    display: flex;
+    position: relative;
+    top: 17px;
+    flex-wrap: wrap;
+}
+
+.cord {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 10px;
+    position: relative;
+    left: 5%;
+    top: -20px;
+    column-gap: 15px;
+}
+
+.c {
+    display: inline-flex;
+    margin: 1%;
+}
+
+.m {
+    margin-left: 2%;
+}
+
+.z {
+    width: 350px;
+}
+
+.img2 {
+    position: relative;
+    left: 59%;
+    top: 70px;
+}
