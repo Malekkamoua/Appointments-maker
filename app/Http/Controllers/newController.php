@@ -150,9 +150,7 @@ class newController extends Controller {
 
         $message = '<br> <b> Date </b>: '.$date. ' <br> <b> Heure </b> : '.$horaire->horaire;
 
-        $qrcode = base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->generate('Make me into a QrCode!'));
 
-        $data['qrcode'] = $qrcode;
         $data['num_rdv'] = $fiche_patient->id;
         $data['saisie'] = $fiche_patient->created_at;
         $data['date_rdv'] = $horaire->date ;
@@ -170,6 +168,9 @@ class newController extends Controller {
         $data['passport'] = $request->input('passport');
         $data['billet'] = $request->input('billet');
 
+        $qrcode_msg = $data['nom'].' / '.$data['prenom'].' / '.$data['tel'].' / '.$data['date_rdv'].' / '.$data['heure_rdv'];
+        $qrcode = base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->generate($qrcode_msg));
+        $data['qrcode'] = $qrcode;
 
         if ($request->input('motif_test') == 'V' || $request->input('motif_test') == 'A') {
             $data['show_text'] = true;
@@ -177,15 +178,25 @@ class newController extends Controller {
             $data['show_text'] = false;
         }
 
+        if ($request->input('motif_test') == 'V' || $request->input('motif_test') == 'R') {
+            $data['show_text_voyage'] = true;
+        }else{
+            $data['show_text_voyage'] = false;
+        }
+
         $pdf = PDF::loadView('myPDF', $data);
 
         $pdf->stream();
 
-        Mail::send([], [], function($message)use($data, $pdf) {
-            $message->to('malekkamoua50@gmail.com', 'malekkamoua50@gmail.com')
-                    ->subject('Rendez-vous')
-                    ->attachData($pdf->output(), "render-vous.pdf");
-        });
+        if($request->input('email') != ""){
+
+            Mail::send([], [], function($message)use($data, $pdf) {
+                $message
+                        ->to($data['email'])
+                        ->subject('Rendez-vous')
+                        ->attachData($pdf->output(), "render-vous.pdf");
+            });
+        }
 
         return view('recu', [
             'message' => $message,

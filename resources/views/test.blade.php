@@ -276,9 +276,17 @@
 
             if (this.value == 'V') {
                 $('#email').attr('required', 'required');
+                $('#pays').attr('required', 'required');
+                $('#passport').attr('required', 'required');
+                $('#billet').attr('required', 'required');
+
 
             } else {
-                $('#email').removeAttr('required');;
+                $('#email').removeAttr('required');
+                $('#pays').removeAttr('required');
+                $('#passport').removeAttr('required');
+                $('#billet').removeAttr('required');
+
             }
 
             document.getElementById('hidden_div').style.display = style;

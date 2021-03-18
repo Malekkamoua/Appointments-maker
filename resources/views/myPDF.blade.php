@@ -93,6 +93,8 @@
                         {{$adresse}} <br>
                     </td>
                 </tr>
+
+                @if($show_text_voyage)
                 <tr>
                     <td>
                         <b>PAYS DE DEPART:</b> <br>
@@ -108,6 +110,8 @@
                         {{$billet}} <br>
                     </td>
                 </tr>
+                @endif
+
             </tbody>
         </table>
     </div>

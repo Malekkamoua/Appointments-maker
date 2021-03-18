@@ -45,7 +45,7 @@
                 </p>
                 </ul>
                 <p class="text-1">
-                    Le résultat du test est disponible après 48h. Les résultats des tests RT-PCR Covid-19 sont
+                    Le résultat du test est disponible après 24h. Les résultats des tests RT-PCR Covid-19 sont
                     consultables sur le site web <a href="https://barounilab.com/" target="_blank"><b
                             style="color:red;font-weight:bolder;">www.barounilab.com</b></a>
                 </p>
