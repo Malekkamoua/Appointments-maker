@@ -25,8 +25,8 @@
     <div>
         <center> <img src="./header2.jpg" alt="logo"></center>
         <h5 class="imgs">
-            <center>Laboratoire Mohamed Nejib Barouni El menzah 6 <br> Ariana (Tél: 71 236 155 - 71
-                767 177)</center>
+            <center>Laboratoire Ben Ayed ennasr <br> Ariana (Tél: 71 999 999 - 71
+                888 888)</center>
         </h5>
         <h4>
             @if($show_text)
@@ -59,7 +59,7 @@
             </div>
 
             <div class="col-xs-4">
-                <p><b>DATE DE RENDEZ-VOUS: </b> {{$date_rdv}} </p>
+                <p><b>DATE DE RENDEZ-VOUS: </b> <br> {{$date_rdv}} </p>
                 <p><b>HEURE DE RENDEZ-VOUS: </b> {{$heure_rdv}} </p>
             </div>
         </div>

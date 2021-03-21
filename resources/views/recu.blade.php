@@ -13,17 +13,18 @@
     <link rel="stylesheet" type="text/css" href="../../fonts/line-awesome/css/line-awesome.min.css">
 
     <!-- Main Style Css -->
-    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" href="/../../css/style.css" />
 </head>
 
 <body class="form-v4">
     <div class="page-content">
         <div class="form-v4-content">
+
             <div class="form-left">
                 <div style="display:flex;padding:5%;">
-                    <img src="../../3acb05f8332bf07e11b4d7f552d90224_110x110.jpg" alt="aaa">
-                    <h2 style="margin:5%;">Laboratoire Najib Barouni</h2>
+                    <center><img src="/public/logobenayed.jpg" alt="logobenayed" style="margin-left: 7%;"></center> <br>
                 </div>
+                <h4> Laboratoire Azza Ben Ayed</h4> <br>
                 <h3>Information</h3>
 
                 <p class="text-1">
@@ -35,7 +36,7 @@
                 <p class="text-2"><span><b>Important:</b></span>
                     <ul>
                         <li>Si vous êtes en confinement et que vous souhaitez vous faire tester pour la COVID-19, merci
-                            de nous appeler sur le numéro : 23 707 465
+                            de nous appeler sur le numéro :
                         </li>
                         <li>
                             Toute personne qui se présente sans rendez-vous ne sera pas prise en charge.
@@ -45,8 +46,8 @@
                 </ul>
                 <p class="text-1">
                     Le résultat du test est disponible après 24h. Les résultats des tests RT-PCR Covid-19 sont
-                    consultables sur le site web <a href="https://barounilab.com/"><b
-                            style="color:red;font-weight:bolder;">www.barounilab.com</b></a>
+                    consultables sur le site web <a href="http://labobenayed.com/" target="_blank"><b
+                            style="color:red;font-weight:bolder;">www.labobenayed.com</b></a>
                 </p>
             </div>
 
@@ -56,11 +57,14 @@
                 <div class="alert alert-info" role="alert" style="position:relative; top:30px;">
 
                     <h4 class="alert-heading">Votre rendez-vous est fixé pour le:</h4>
-                    <p> {!! $message !!}</p>
+                    <p> {!! $message !!}</p> <br>
+                    @if($show_mail_message)
+                        <p>Un mail vous a été envoyé contenant les informations que vous avez saisies ainsi que votre date et horaire de rendez-vous.</p>
+                    @endif
                     <hr>
                     <p class="mb-0">
                         Prière se présenter 15 minutes avant votre rendez-vous pour les formalités d'inscription et paiement. <br><br>
-                        Si vous avez des questions, veuillez appeler le 23 707 465.
+                        Si vous avez des questions, veuillez appeler le *******.
                     </p>
                 </div>
 

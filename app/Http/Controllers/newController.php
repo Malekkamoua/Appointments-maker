@@ -94,7 +94,7 @@ class newController extends Controller {
                 $dat = $horaire->date;
                 $pieces = explode("-", $dat);
                 $h = substr($horaire->horaire,0,5);
-
+                return $h;
                 $message = '<br> <b> Date </b>: '.$pieces[2].'/'.$pieces[1].'/'.$pieces[0]. ' <br> <b> Heure </b> : '.$h;
 
                 return view('recu', [
@@ -106,14 +106,28 @@ class newController extends Controller {
 
         return view('test', [
             'tel' => $tel,
-            'ddn' => $ddn
+            'ddn' => $ddn,
+            "msg" =>""
         ]);
     }
 
     public function storeFiche(Request $request){
 
+        $msg = "";
+        if ($request->input('horaire') ==  null) {
+
+            $msg= " Vous devez choisir l'horaire de votre rendez-vous pour finaliser la procédure.";
+
+            return view('test', [
+                'tel' => $request->input('tel'),
+                'ddn' => $request->input('ddn'),
+                "msg" =>$msg
+            ]);
+
+        }
+
         $date  =  explode("/",  $request['date_voyage']);
-        $date = $date[2] . '-'.$date[0].'-'.$date[1];
+        $date = $date[2] . '-'.$date[1].'-'.$date[0];
 
         $horaire = Horaire::where('date', '=', $date)
         ->where('horaire', '=',  $request->input('horaire') )
@@ -139,7 +153,7 @@ class newController extends Controller {
         $fiche_patient->billet = $request->input('billet');
         $fiche_patient->passport = $request->input('passport');
 
-        $fiche_patient->date_rdv = $date;
+        $fiche_patient->date_rdv = $date. ' '.$horaire->horaire;
 
         $fiche_patient->horaire_id = $horaire->id;
 
@@ -148,7 +162,7 @@ class newController extends Controller {
 
         $final = [$horaire, $fiche_patient];
 
-        $message = '<br> <b> Date </b>: '.$date. ' <br> <b> Heure </b> : '.$horaire->horaire;
+        $message = '<br> <b> Date </b>: '.$date. ' <br> <b> Heure </b> : '. substr($horaire->horaire,0,5);
 
 
         $data['num_rdv'] = $fiche_patient->id;
@@ -172,7 +186,7 @@ class newController extends Controller {
         $qrcode = base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->generate($qrcode_msg));
         $data['qrcode'] = $qrcode;
 
-        if ($request->input('motif_test') == 'V' || $request->input('motif_test') == 'A') {
+        if ($request->input('motif_test') != 'S') {
             $data['show_text'] = true;
         }else{
             $data['show_text'] = false;
@@ -183,6 +197,8 @@ class newController extends Controller {
         }else{
             $data['show_text_voyage'] = false;
         }
+
+        $show_mail_message= false;
 
         $pdf = PDF::loadView('myPDF', $data);
 
@@ -196,10 +212,14 @@ class newController extends Controller {
                         ->subject('Rendez-vous')
                         ->attachData($pdf->output(), "render-vous.pdf");
             });
+
+            $show_mail_message= true;
+
         }
 
         return view('recu', [
             'message' => $message,
+            'show_mail_message' =>$show_mail_message,
             'fiche' =>$fiche_patient
         ]);
 

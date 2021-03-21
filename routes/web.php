@@ -19,10 +19,14 @@ Route::post('/findDates', 'newController@findDates');
 Route::post('/findTimes', 'newController@findTimes');
 
 Route::post('/rendez-vous-covid', 'newController@createFiche')->name('createFiche');
-Route::post('/rendez-vous-covid/engerister', 'newController@storeFiche')->name('storeFiche');
+Route::post('/rendez-vous-covid/enregistrer', 'newController@storeFiche')->name('storeFiche');
 Route::get('/generate-pdf','newController@generatePDF');
 
 Route::post('/annuler', 'newController@annulerRdv')->name('annulerRdv');
+
+Route::get('/any-route', function () {
+  Artisan::call('storage:link');
+});
 
 // Route::get('qrcode_blade', function () {
 //     return view('qr-code');
