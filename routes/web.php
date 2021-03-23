@@ -20,7 +20,8 @@ Route::post('/findTimes', 'newController@findTimes');
 
 Route::post('/rendez-vous-covid', 'newController@createFiche')->name('createFiche');
 Route::post('/rendez-vous-covid/enregistrer', 'newController@storeFiche')->name('storeFiche');
-Route::get('/generate-pdf','newController@generatePDF');
+
+Route::post('/generate-pdf','newController@generatePDF');
 
 Route::post('/annuler', 'newController@annulerRdv')->name('annulerRdv');
 

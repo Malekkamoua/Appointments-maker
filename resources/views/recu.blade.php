@@ -59,11 +59,13 @@
                     <h4 class="alert-heading">Votre rendez-vous est fixé pour le:</h4>
                     <p> {!! $message !!}</p> <br>
                     @if($show_mail_message)
-                        <p>Un mail vous a été envoyé contenant les informations que vous avez saisies ainsi que votre date et horaire de rendez-vous.</p>
+                    <p>Un mail vous a été envoyé contenant les informations que vous avez saisies ainsi que votre date
+                        et horaire de rendez-vous.</p>
                     @endif
                     <hr>
                     <p class="mb-0">
-                        Prière se présenter 15 minutes avant votre rendez-vous pour les formalités d'inscription et paiement. <br><br>
+                        Prière se présenter 15 minutes avant votre rendez-vous pour les formalités d'inscription et
+                        paiement. <br><br>
                         Si vous avez des questions, veuillez appeler le *******.
                     </p>
                 </div>
@@ -74,11 +76,20 @@
                 {{csrf_field()}}
                 <input name="_method" type="hidden" value="post">
                 <input type="hidden" name="tel" value="{{$fiche->gsm}}">
-                <button class="btn btn-danger" type="submit">Annuler rendez-vous</button>
+                <div class="buttons" style="display: flex;">
+                    <button class="btn btn-danger" type="submit">Annuler rendez-vous</button>
             </form>
-            @endif
-            </form>
+            <form action="{{action('newController@generatePDF')}}" method="post">
+                {{csrf_field()}}
+                <input name="_method" type="hidden" value="post">
+                <input type="hidden" name="tel" value="{{$fiche->gsm}}">
+                <button class="btn btn-info" type="submit" style="position:relative; left:5%;">Télécharger pdf</button>
         </div>
+    </div>
+    </form>
+    @endif
+
+    </div>
     </div>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

@@ -94,12 +94,13 @@ class newController extends Controller {
                 $dat = $horaire->date;
                 $pieces = explode("-", $dat);
                 $h = substr($horaire->horaire,0,5);
-                return $h;
                 $message = '<br> <b> Date </b>: '.$pieces[2].'/'.$pieces[1].'/'.$pieces[0]. ' <br> <b> Heure </b> : '.$h;
 
                 return view('recu', [
                     'fiche' =>$fiche,
                     'message' => $message,
+                    'show_mail_message' =>""
+
                 ]);
             }
         }
@@ -167,9 +168,8 @@ class newController extends Controller {
 
         $data['num_rdv'] = $fiche_patient->id;
         $data['saisie'] = $fiche_patient->created_at;
-        $data['date_rdv'] = $horaire->date ;
-        $data['heure_rdv'] = $horaire->horaire;
-
+        $data['date_rdv'] = $request['date_voyage'];
+        $data['heure_rdv'] = substr($horaire->horaire,0,5);
         $data['nom'] = $request->input('nom');
         $data['prenom'] = $request->input('prenom');
         $data['ddn'] = $request->input('ddn');
@@ -210,7 +210,7 @@ class newController extends Controller {
                 $message
                         ->to($data['email'])
                         ->subject('Rendez-vous')
-                        ->attachData($pdf->output(), "render-vous.pdf");
+                        ->attachData($pdf->output(), "rendez-vous.pdf");
             });
 
             $show_mail_message= true;
@@ -225,31 +225,68 @@ class newController extends Controller {
 
     }
 
-    /**
+     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function generatePDF()
-    {
-        $data["email"] = "aatmaninfotech@gmail.com";
-        $data["title"] = "From ItSolutionStuff.com";
-        $data["body"] = "This is Demo";
+    public function generatePDF(Request $request) {
 
-        // $pdf = PDF::loadView('myPDF');
+        $tel = $request->input('tel');
+        $ddn = $request->input('ddn');
 
-        // Mail::send('myPDF', $data, function($message)use($data, $pdf) {
-        //     $message->to('malekkamoua50@gmail.com', 'malekkamoua50@gmail.com')
-        //             ->subject('Rendez-vous')
-        //             ->attachData($pdf->output(), "render-vous.pdf");
-        // });
+        $fiche_patient = Fiche::where([
+            'gsm' => $tel])->first();
 
-        // dd('Mail sent successfully');
-        $qrcode = base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->generate('Hello world !'));
-        $pdf = PDF::loadView('myPDF', compact('qrcode'));
-        return $pdf->stream();
+        $horaire = Horaire::where([
+            'gsm' => $tel])->first();
+
+            $data['num_rdv'] = $fiche_patient->id;
+            $data['saisie'] = $fiche_patient->created_at;
+
+            $dat = $horaire->date;
+            $pieces = explode("-", $dat);
+            // $h = substr($horaire->horaire,0,5);
+            // $message = '<br> <b> Date </b>: '.$pieces[2].'/'.$pieces[1].'/'.$pieces[0]. ' <br> <b> Heure </b> : '.$h;
+
+            $data['date_rdv'] = $pieces[2].'/'.$pieces[1].'/'.$pieces[0] ;
+            $data['heure_rdv'] = $horaire->horaire;
+
+            $data['nom'] = $fiche_patient->nom;
+            $data['prenom'] = $fiche_patient->prenom;
+            $data['ddn'] = $fiche_patient->ddn;
+            $data['sexe'] = $fiche_patient->sexe;
+            $data['tel'] = $request->input('tel');
+            $data['email'] = $fiche_patient->email;
+            $data['adresse'] = $fiche_patient->adresse;
+
+            $data['pays'] = $fiche_patient->pays;
+            $data['passport'] = $fiche_patient->passport;
+            $data['billet'] = $fiche_patient->billet;
+
+            $qrcode_msg = $data['nom'].' / '.$data['prenom'].' / '.$data['tel'].' / '.$data['date_rdv'].' / '.$data['heure_rdv'];
+            $qrcode = base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->generate($qrcode_msg));
+            $data['qrcode'] = $qrcode;
+
+            if ($fiche_patient->motif_test != 'S') {
+                $data['show_text'] = true;
+            }else{
+                $data['show_text'] = false;
+            }
+
+            if ($fiche_patient->motif_test == 'V' || $fiche_patient->motif_test == 'R') {
+                $data['show_text_voyage'] = true;
+            }else{
+                $data['show_text_voyage'] = false;
+            }
+
+            $show_mail_message= false;
+
+        $pdf = PDF::loadView('myPDF', $data);
+        return $pdf->download();
 
     }
+
 
     public function generateQrCode() {
 
