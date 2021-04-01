@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="../../fonts/line-awesome/css/line-awesome.min.css">
 
     <!-- Main Style Css -->
-    <link rel="stylesheet" href="/../../css/style.css" />
+    <link rel="stylesheet" href="/public/css/style.css" />
 </head>
 
 <body class="form-v4">
@@ -22,9 +22,9 @@
 
             <div class="form-left">
                 <div style="display:flex;padding:5%;">
-                    <center><img src="/public/logobenayed.jpg" alt="logobenayed" style="margin-left: 7%;"></center> <br>
+                    <center><img src="public/3acb05f8332bf07e11b4d7f552d90224_110x110.jpg" alt="logobarouni" style="margin-left: 7%;"></center>
                 </div>
-                <h4> Laboratoire Azza Ben Ayed</h4> <br>
+                <center><h4> Laboratoire Nejib Barouni</h4></center> <br>
                 <h3>Information</h3>
 
                 <p class="text-1">
@@ -46,8 +46,8 @@
                 </ul>
                 <p class="text-1">
                     Le résultat du test est disponible après 24h. Les résultats des tests RT-PCR Covid-19 sont
-                    consultables sur le site web <a href="http://labobenayed.com/" target="_blank"><b
-                            style="color:red;font-weight:bolder;">www.labobenayed.com</b></a>
+                    consultables sur le site web <a href="https://barounilab.com/" target="_blank"><b
+                            style="color:red;font-weight:bolder;">www.barounilab.com</b></a>
                 </p>
             </div>
 
@@ -66,7 +66,7 @@
                     <p class="mb-0">
                         Prière se présenter 15 minutes avant votre rendez-vous pour les formalités d'inscription et
                         paiement. <br><br>
-                        Si vous avez des questions, veuillez appeler le *******.
+                        Si vous avez des questions, veuillez appeler le 23 707 465
                     </p>
                 </div>
 

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex">
 
-    <title>Invoice</title>
+    <title>PDF</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -25,8 +25,7 @@
     <div>
         <center> <img src="./header2.jpg" alt="logo"></center>
         <h5 class="imgs">
-            <center>Laboratoire Ben Ayed ennasr <br> Ariana (Tél: 71 999 999 - 71
-                888 888)</center>
+            <center>Laboratoire Nejib Barouni<br> Menzah 6 (Tél:  23 707 465)</center>
         </h5>
         <h4>
             @if($show_text)

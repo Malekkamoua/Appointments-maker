@@ -11,27 +11,20 @@
     <!-- Font-->
     <link rel="stylesheet" type="text/css" href="../../css/opensans-font.css">
     <link rel="stylesheet" type="text/css" href="../../fonts/line-awesome/css/line-awesome.min.css">
-    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/redmond/jquery-ui.css" rel="stylesheet" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
-    <!-- Main Style Css -->
-    <link rel="stylesheet" href="/../../css/style.css" />
-    <style>
-        .active {
-            background-color: yellow;
-        }
 
-    </style>
+    <!-- Main Style Css -->
+    <link rel="stylesheet" href="/public/css/style.css" />
 </head>
 
 <body class="form-v4">
     <div class="page-content">
         <div class="form-v4-content">
+
             <div class="form-left">
                 <div style="display:flex;padding:5%;">
-                    <img src="/public/logobenayed.jpg" style="margin-left:7%;" alt="aaa">
+                    <center><img src="public/3acb05f8332bf07e11b4d7f552d90224_110x110.jpg" alt="logobarouni" style="margin-left: 7%;"></center>
                 </div>
-                <h4> Laboratoire Azza Ben Ayed</h4> <br>
+                <center><h4> Laboratoire Nejib Barouni</h4></center> <br>
                 <h3>Information</h3>
 
                 <p class="text-1">
@@ -43,7 +36,7 @@
                 <p class="text-2"><span><b>Important:</b></span>
                     <ul>
                         <li>Si vous êtes en confinement et que vous souhaitez vous faire tester pour la COVID-19, merci
-                            de nous appeler sur le numéro : *****
+                            de nous appeler sur le numéro : 23 707 465
                         </li>
                         <li>
                             Toute personne qui se présente sans rendez-vous ne sera pas prise en charge.
@@ -53,8 +46,8 @@
                 </ul>
                 <p class="text-1">
                     Le résultat du test est disponible après 24h. Les résultats des tests RT-PCR Covid-19 sont
-                    consultables sur le site web <a href="http://labobenayed.com/"><b
-                            style="color:red;font-weight:bolder;">www.labobenayed.com</b></a>
+                    consultables sur le site web <a href="https://barounilab.com/"><b
+                            style="color:red;font-weight:bolder;">www.barounilab.com</b></a>
                 </p>
             </div>
 
@@ -63,9 +56,9 @@
 
                 {{csrf_field()}}
 
-                <input name="_method" type="hidden" value="post">
+                <b style="color:red;">{{$msg}} </b> <br><br>
 
-                <b style="color:red;">{{$msg}}</b> <br>
+                <input name="_method" type="hidden" value="post">
 
                 <div class="Form-field">
                     <div class="Form-labelBlock">
@@ -133,7 +126,7 @@
                             <option value="A">Suspect Covid</option>
                             <option value="V">Voyage</option>
                             <option value="R">Retour voyage</option>
-                            <option value="S">sang</option>
+                            <option value="S">Prélevement sanguin</option>
                         </select>
                     </div>
                 </div>
@@ -229,8 +222,6 @@
                 <div class="Form-labelBlock">
                     <label for="" class="FormElement FormElement-label">Date rendez-vous <b
                             style="color:red;">*</b></label>
-                    <small id="note" style="display:none;">Choisissez votre rendez-vous deux jours aprés votre date
-                        d'arrivée.</small>
                 </div>
                 <input id="calendar" class="FormElement FormElement-input" name="date_voyage" disabled required> <br>
                 <br>
@@ -271,37 +262,24 @@
                 jQuery.browser.version = RegExp.$1;
             }
         })();
-
         document.getElementById('motif_test').addEventListener('change', function () {
-
             $('#calendar').removeAttr('disabled');
-
             var style = this.value == 'V' || this.value == 'R' ? 'block' : 'none';
-            var note = this.value == 'R' ? 'block' : 'none';
-
             if (this.value == 'V') {
                 $('#email').attr('required', 'required');
                 $('#pays').attr('required', 'required');
                 $('#passport').attr('required', 'required');
                 $('#billet').attr('required', 'required');
-
-
             } else {
                 $('#email').removeAttr('required');
                 $('#pays').removeAttr('required');
                 $('#passport').removeAttr('required');
                 $('#billet').removeAttr('required');
             }
-
             document.getElementById('hidden_div').style.display = style;
-            document.getElementById('note').style.display = note;
-
         });
-
         var exclude = []
-
         let date = null
-
         $('#calendar').datepicker({
             beforeShowDay: function (date) {
                 var day = jQuery.datepicker.formatDate('dd-mm-yy', date);
@@ -313,10 +291,8 @@
         $("#calendar").datepicker("option", "dateFormat", "dd/mm/yy");
 
         $('select[name=motif_test]').on('change', function () {
-
             $('#times').empty();
             $('#calendar').html(' ');
-
             $.ajax({
                 type: "Post",
                 url: "/findDates",
@@ -329,14 +305,10 @@
                 }
             });
         });
-
         $("#calendar").change(function () {
-
             let motif_test = $('select[name=motif_test] option').filter(':selected').val()
-
             let arr = $(this).val().split('/')
             date = arr[2] + '-' + arr[1] + '-' + arr[0]
-
             $.ajax({
                 type: "Post",
                 url: "/findTimes",
@@ -349,9 +321,7 @@
                     console.log(result);
                     $('#times').empty();
                     if (result.length == 0) {
-                        $("#times").append(
-                            '<small ><center> <b style="color:red;"> Horaire indisponible. </b></center></small>'
-                        )
+                        $("#times").append('<small><center>Horaire indisponible.</center></small>')
                     } else {
                         $("#times").append(
                             '<label>Horaires disponibles: <b style="color:red;">*</b></label> ')
@@ -359,44 +329,19 @@
                     result.forEach(element => {
                         $("#times").append(
                             '<div style="display: inline-grid;margin:10px;"> <a class="btn btn-info horaire">' +
-                            element.slice(0, -3) + '</a>  <div>');
+                            element.slice(0, -3)  + '</a>  <div>');
                     });
-
                     $(".horaire").click(function () {
-
                         $(".horaire").removeClass("active");
                         $(this).addClass('active');
-
                         if ($(this).hasClass("active")) {
                             console.log($(this).html() + ':00')
                             $("input[name=horaire]").val($(this).html());
                         }
                     });
-
-
                 }
             });
         });
-
-        jQuery.fn.preventDoubleSubmission = function () {
-            $(this).on('submit', function (e) {
-                var $form = $(this);
-
-                if ($form.data('submitted') === true) {
-                    // Previously submitted - don't submit again
-                    e.preventDefault();
-                } else {
-                    // Mark it so that the next submit can be ignored
-                    $form.data('submitted', true);
-                }
-            });
-
-            // Keep chainability
-            return this;
-        };
-
-        $('form').preventDoubleSubmission();
-
     </script>
 
 </body>

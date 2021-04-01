@@ -250,7 +250,7 @@ class newController extends Controller {
             // $message = '<br> <b> Date </b>: '.$pieces[2].'/'.$pieces[1].'/'.$pieces[0]. ' <br> <b> Heure </b> : '.$h;
 
             $data['date_rdv'] = $pieces[2].'/'.$pieces[1].'/'.$pieces[0] ;
-            $data['heure_rdv'] = $horaire->horaire;
+            $data['heure_rdv'] = substr($horaire->horaire,0,5);
 
             $data['nom'] = $fiche_patient->nom;
             $data['prenom'] = $fiche_patient->prenom;
