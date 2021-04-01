@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="../../fonts/line-awesome/css/line-awesome.min.css">
 
     <!-- Main Style Css -->
-    <link rel="stylesheet" href="/public/css/style.css" />
+    <link rel="stylesheet" href="/../../css/style.css" />
 </head>
 
 <body class="form-v4">
@@ -22,9 +22,12 @@
 
             <div class="form-left">
                 <div style="display:flex;padding:5%;">
-                    <center><img src="public/3acb05f8332bf07e11b4d7f552d90224_110x110.jpg" alt="logobarouni" style="margin-left: 7%;"></center>
+                    <center><img src="public/3acb05f8332bf07e11b4d7f552d90224_110x110.jpg" alt="logobarouni"
+                            style="margin-left: 7%;"></center>
                 </div>
-                <center><h4> Laboratoire Nejib Barouni</h4></center> <br>
+                <center>
+                    <h4> Laboratoire Nejib Barouni</h4>
+                </center> <br>
                 <h3>Information</h3>
 
                 <p class="text-1">
@@ -34,15 +37,15 @@
                     pour vous accompagner dans vos analyses.
                 </p>
                 <p class="text-2"><span><b>Important:</b></span>
-                    <ul>
-                        <li>Si vous êtes en confinement et que vous souhaitez vous faire tester pour la COVID-19, merci
-                            de nous appeler sur le numéro :
-                        </li>
-                        <li>
-                            Toute personne qui se présente sans rendez-vous ne sera pas prise en charge.
-                        </li>
+                <ul>
+                    <li>Si vous êtes en confinement et que vous souhaitez vous faire tester pour la COVID-19, merci
+                        de nous appeler sur le numéro :
+                    </li>
+                    <li>
+                        Toute personne qui se présente sans rendez-vous ne sera pas prise en charge.
+                    </li>
 
-                </p>
+                    </p>
                 </ul>
                 <p class="text-1">
                     Le résultat du test est disponible après 24h. Les résultats des tests RT-PCR Covid-19 sont
@@ -77,7 +80,7 @@
                 <input name="_method" type="hidden" value="post">
                 <input type="hidden" name="tel" value="{{$fiche->gsm}}">
                 <div class="buttons" style="display: flex;">
-                    <button class="btn btn-danger" type="submit">Annuler rendez-vous</button>
+                    <!-- <button class="btn btn-danger" type="submit">Annuler rendez-vous</button> -->
             </form>
             <form action="{{action('newController@generatePDF')}}" method="post">
                 {{csrf_field()}}
@@ -102,21 +105,20 @@
 
 
     <script>
-        jQuery.browser = {};
-        (function () {
-            jQuery.browser.msie = false;
-            jQuery.browser.version = 0;
-            if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
-                jQuery.browser.msie = true;
-                jQuery.browser.version = RegExp.$1;
-            }
-        })();
+    jQuery.browser = {};
+    (function() {
+        jQuery.browser.msie = false;
+        jQuery.browser.version = 0;
+        if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+            jQuery.browser.msie = true;
+            jQuery.browser.version = RegExp.$1;
+        }
+    })();
 
-        document.getElementById('motif_test').addEventListener('change', function () {
-            var style = this.value == 'voyage' ? 'block' : 'none';
-            document.getElementById('hidden_div').style.display = style;
-        });
-
+    document.getElementById('motif_test').addEventListener('change', function() {
+        var style = this.value == 'voyage' ? 'block' : 'none';
+        document.getElementById('hidden_div').style.display = style;
+    });
     </script>
 </body>
 

@@ -66,7 +66,7 @@ class newController extends Controller {
         $existe = false;
 
         $fiche = Fiche::where([
-            'gsm' => $tel])->first();
+            'gsm' => $tel])->orderBy('id','desc')->first();
 
         if ($fiche != null) {
             if ($fiche->ddn != $ddn) {
@@ -79,35 +79,53 @@ class newController extends Controller {
             }
         }
 
-        $horaire = Horaire::where('gsm',$tel)->first();
+        $horaire_id = $fiche->horaire_id;
+
+        $horaire = Horaire::where('id',$horaire_id)->first();
 
         if ($horaire != null) {
 
             $fiche = Fiche::where([
                 'ddn' => $ddn,
-                'horaire_id' => $horaire->id
-            ])->first();
+                'gsm' => $tel
+            ])->orderBy('id','desc')->first();
 
             if ($fiche != null) {
-
 
                 $dat = $horaire->date;
                 $pieces = explode("-", $dat);
                 $h = substr($horaire->horaire,0,5);
-                $message = '<br> <b> Date </b>: '.$pieces[2].'/'.$pieces[1].'/'.$pieces[0]. ' <br> <b> Heure </b> : '.$h;
+                $date = $pieces[0].'-'.$pieces[1].'-'.$pieces[2];
 
-                return view('recu', [
-                    'fiche' =>$fiche,
-                    'message' => $message,
-                    'show_mail_message' =>""
+                $date = Carbon::createFromDate($pieces[0], $pieces[1], $pieces[2]);
 
-                ]);
+                //$date = Carbon::createFromDate("2021", "03", "20");
+                // $now = Carbon::now()->toDateString();
+                // $yesterday = Carbon::yesterday()->toDateString();
+                $tomorrow = Carbon::tomorrow()->toDateString();
+
+                $result = $date->gte($tomorrow);
+
+                $arr = [$date, $tomorrow,$result];
+
+                if ($result) {
+                    $message = '<br> <b> Date </b>: '.$pieces[2].'/'.$pieces[1].'/'.$pieces[0]. ' <br> <b> Heure </b> : '.$h;
+
+                    return view('recu', [
+                        'fiche' =>$fiche,
+                        'message' => $message,
+                        'show_mail_message' =>""
+
+                    ]);
+                }
+
             }
         }
 
         return view('test', [
             'tel' => $tel,
             'ddn' => $ddn,
+            'fiche' => $fiche,
             "msg" =>""
         ]);
     }
